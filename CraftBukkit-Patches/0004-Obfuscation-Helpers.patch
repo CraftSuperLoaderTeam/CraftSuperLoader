@@ -1,0 +1,27 @@
+From e66b31becc7c4694038febb6aa79e55fec1c49db Mon Sep 17 00:00:00 2001
+From: md_5 <git@md-5.net>
+Date: Mon, 14 Apr 2014 10:38:04 +1000
+Subject: [PATCH] Obfuscation Helpers
+
+Provides several friendly named methods which map to a obfuscated method. Obfuscated methods which are used frequently should be added to this file to ease with updates to new Minecraft versions.
+
+diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
+index 646a3c86..48495b64 100644
+--- a/src/main/java/net/minecraft/server/MinecraftServer.java
++++ b/src/main/java/net/minecraft/server/MinecraftServer.java
+@@ -1298,6 +1298,12 @@ public abstract class MinecraftServer implements ICommandListener, Runnable, IAs
+ 
+     }
+ 
++    // Spigot Start
++    public ServerConnection getServerConnection()
++    {
++        return this.p;
++    }
++    // Spigot End
+     public ServerConnection an() {
+         return this.p;
+     }
+-- 
+2.17.1
+

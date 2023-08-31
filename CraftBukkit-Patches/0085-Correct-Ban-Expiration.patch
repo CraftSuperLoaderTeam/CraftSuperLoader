@@ -1,0 +1,22 @@
+From 3017306b23093c9edaea482a1db2df78020c0647 Mon Sep 17 00:00:00 2001
+From: md_5 <git@md-5.net>
+Date: Wed, 16 Apr 2014 11:14:38 +1000
+Subject: [PATCH] Correct Ban Expiration
+
+
+diff --git a/src/main/java/net/minecraft/server/PlayerList.java b/src/main/java/net/minecraft/server/PlayerList.java
+index c3aa4e7d..8fac17bc 100644
+--- a/src/main/java/net/minecraft/server/PlayerList.java
++++ b/src/main/java/net/minecraft/server/PlayerList.java
+@@ -490,7 +490,7 @@ public abstract class PlayerList {
+             }
+ 
+             // return s;
+-            event.disallow(PlayerLoginEvent.Result.KICK_BANNED, s);
++            if (!gameprofilebanentry.hasExpired()) event.disallow(PlayerLoginEvent.Result.KICK_BANNED, s); // Spigot
+         } else if (!this.isWhitelisted(gameprofile)) {
+             // return "You are not white-listed on this server!";
+             event.disallow(PlayerLoginEvent.Result.KICK_WHITELIST, org.spigotmc.SpigotConfig.whitelistMessage); // Spigot
+-- 
+2.17.1
+

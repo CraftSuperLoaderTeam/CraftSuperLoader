@@ -1,0 +1,27 @@
+From b221ea3d8136d7765654ccc624c560ee2a728898 Mon Sep 17 00:00:00 2001
+From: md_5 <md_5@live.com.au>
+Date: Sun, 3 Feb 2013 09:20:19 +1100
+Subject: [PATCH] Handle Null Tile Entities
+
+
+diff --git a/src/main/java/net/minecraft/server/World.java b/src/main/java/net/minecraft/server/World.java
+index 195e2072..73e95167 100644
+--- a/src/main/java/net/minecraft/server/World.java
++++ b/src/main/java/net/minecraft/server/World.java
+@@ -1410,6 +1410,13 @@ public abstract class World implements IBlockAccess {
+ 
+         while (iterator.hasNext()) {
+             TileEntity tileentity = (TileEntity) iterator.next();
++            // Spigot start
++            if (tileentity == null) {
++                getServer().getLogger().severe("Spigot has detected a null entity and has removed it, preventing a crash");
++                iterator.remove();
++                continue;
++            }
++            // Spigot end
+ 
+             if (!tileentity.y() && tileentity.u()) {
+                 BlockPosition blockposition = tileentity.getPosition();
+-- 
+2.17.1
+
